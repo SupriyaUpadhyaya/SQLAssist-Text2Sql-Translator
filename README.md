@@ -10,20 +10,6 @@ Natural Language SQL Translator with following features and capabilities:
 
 Full report and presentation is available at [report](report)
 ##
-### Otto-von-Guericke-Universität Magdeburg, Germany
-|Team members|
-| -------- |
-|Basasvaraj Hiremath|
-|Dhanashree Gunda|
-|Mallika Manam|
-|Niharika Ramanath|
-|Supriya P Upadhyaya|
-
-|Supervisors|
-| -------- |
-|Dr. Marco Polignano|
-|Prof. Dr.-Ing. Ernesto William De Luca|
-##
 ### Training
 For instruction fine-tune use [training notebook](SupriyaUpadhyaya/HCNLP-Text2Sql-Project/SQLAssist_Training.ipynb). 
 
