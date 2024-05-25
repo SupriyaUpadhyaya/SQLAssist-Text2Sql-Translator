@@ -24,7 +24,9 @@ Google Colab notebooks are available at [notebooks](notebooks)
 
 ### Direct Evaluation
 
-```python evaluation.py```
+```python
+python evaluation.py
+```
 
 Evaluation results are saved in `results` 
 
@@ -34,7 +36,9 @@ Start the SQLAssist application on Google Colab using [app.ipynb](SupriyaUpadhya
 
 To run it locally, 
 
-```streamlit run app.py```
+```python
+streamlit run app.py
+```
 
 ![inference via streamlit app](static/app.png)
 
