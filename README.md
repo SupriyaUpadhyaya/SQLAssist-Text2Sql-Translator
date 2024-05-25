@@ -34,7 +34,7 @@ Evaluation results are saved in `results`
 
 ### SQLAssist application🌐
 
-Start the SQLAssist application on Google Colab using [app.ipynb](SupriyaUpadhyaya/SQLAssist-Text2Sql-Translator/notebooks/app.ipynb)
+Start the SQLAssist application on Google Colab using [app.py](app.py)
 
 To run it locally, 
 
