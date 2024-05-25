@@ -4,6 +4,7 @@ The training and inference was performed using the FastLangaugeModel module from
 
 Our finetuned model can be downloaded from huggingface [basavaraj/text2sql-Llama3-8b](https://huggingface.co/basavaraj/text2sql-Llama3-8b)
 
+##
 ### Training
 For instruction fine-tuning use [train.ipynb](SupriyaUpadhyaya/SQLAssist-Text2Sql-Translator/notebooks/train.ipynb). 
 
