@@ -21,7 +21,7 @@ DATASET_IDS = [
 OUTPUT_DIR = 'results/'
 EXCEL_FILE = 'results/eval_result.xlsx'
 
-model, tokenizer = utils.load_model()
+model, tokenizer = utils.load_model(eval=True)
 
 def load_and_prepare_data(dataset_ids):
     dfs = []

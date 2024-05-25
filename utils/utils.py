@@ -15,7 +15,7 @@ from langchain_community.tools.sql_database.tool import QuerySQLDataBaseTool
 from utils.templates import user_message_template, text_to_sql_inference_tmpl_str, system_message
 
 # Set a default model
-def load_model():
+def load_model(eval=False):
     max_seq_length = 2048 # Choose any! Unsloth auto supports RoPE Scaling internally!
     dtype = None # None for auto detection. Float16 for Tesla T4, V100, Bfloat16 for Ampere+
     load_in_4bit = True # Use 4bit quantization to reduce memory usage. Can be False.
@@ -27,12 +27,12 @@ def load_model():
     torch_dtype=dtype)
     
     FastLanguageModel.for_inference(model)
-    
-    st.session_state["model"] = model
-    st.session_state["tokenizer"] = tokenizer
-    st.session_state["contextRetriever"] = ContextRetriever()
-    st.session_state["refiner"] = Refiner(tokenizer=tokenizer, model=model)
-    st.session_state["rephraser"] = Rephraser(tokenizer=tokenizer, model=model)
+    if not eval:
+        st.session_state["model"] = model
+        st.session_state["tokenizer"] = tokenizer
+        st.session_state["contextRetriever"] = ContextRetriever()
+        st.session_state["refiner"] = Refiner(tokenizer=tokenizer, model=model)
+        st.session_state["rephraser"] = Rephraser(tokenizer=tokenizer, model=model)
     return model, tokenizer
 
 def execute_sql(db_path, sql, question) -> dict:
