@@ -111,7 +111,7 @@ def plot_scores(merged_df):
     plt.ylabel('Score')
     plt.title('Box Plot of BLEU Score and ROUGE Score')
     plt.grid(True)
-    plt.savefig(os.path.join(OUTPUT_DIR, "Mean_Score.png"))
+    plt.savefig(os.path.join(OUTPUT_DIR, "Mean_Scores.png"))
 
 def main():
     merged_df = load_and_prepare_data(DATASET_IDS)
