@@ -132,13 +132,13 @@ def get_history():
           
     return st.session_state.history.messages
 
-def transcribe(question, contextRetriever):
+def transcribe(question):
     
     prev_hist = get_history()
     
-    selected_table_names, selected_table_schema_objs = get_selected_tables(contextRetriever, question)
+    selected_table_names, selected_table_schema_objs = get_selected_tables(st.session_state.contextRetriever, question)
     
-    context = contextRetriever.get_table_context_and_rows_str(question, selected_table_schema_objs)
+    context = st.session_state.contextRetriever.get_table_context_and_rows_str(question, selected_table_schema_objs)
     
     prompt = get_inference_prompt(st.session_state.follow_up, question, context, prev_hist)
 
