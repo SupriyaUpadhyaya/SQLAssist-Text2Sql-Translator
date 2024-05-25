@@ -17,11 +17,11 @@ You can use our checkpoint to evaluation directly or finetune using our notebook
 4. Folder [results](results) contains evaluation results.
 5. Folder [utils](utils) contains templates and helper code.
 6. Folder `static` contains files used in readme.
-
+##
 ### Fine-tuning🔧
 
 Google Colab notebooks are available at [notebooks](notebooks)
-
+##
 ### Direct Evaluation📊
 
 This evaluation script is tailored to assess the performance of our finetuned model across multiple complexity levels using metrics such as BLEU score and ROUGE score. We use text-to-sql datasets for easy, medium and hard complexities from [determined-ai](https://huggingface.co/determined-ai). The results are visulaized using box plots.
@@ -31,7 +31,7 @@ python evaluation.py
 ```
 
 Evaluation results are saved in `results` 
-
+##
 ### SQLAssist application🌐
 
 Start the SQLAssist application on Google Colab using [app.py](app.py)
