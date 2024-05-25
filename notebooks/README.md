@@ -10,15 +10,15 @@ Our selection was trained on [Clinton/Text-to-sql-v1](https://huggingface.co/dat
 
 ##
 ### Training⚙️
-For instruction fine-tuning use [train.ipynb](SupriyaUpadhyaya/SQLAssist-Text2Sql-Translator/notebooks/train.ipynb). 
+For instruction fine-tuning use [train.ipynb](train.ipynb). 
 
 ##
 ### Inference🔍 
-For inference use [inference.ipynb](SupriyaUpadhyaya/SQLAssist-Text2Sql-Translator/notebooks/inference.ipynb). 
+For inference use [inference.ipynb](inference.ipynb). 
 
 ##
 ### Evaluation📈
-For evaluation use [evaluation.ipynb](SupriyaUpadhyaya/SQLAssist-Text2Sql-Translator/notebooks/evaluation.ipynb). 
+For evaluation use [evaluation.ipynb](evaluation.ipynb). 
 
 ##
 ### SQLAssist Finetuned Model
@@ -26,4 +26,4 @@ Our Llama-3-8b finetuned model can be downloaded from huggingface [basavaraj/tex
 
 ##
 ### App
-To run the app on google colab, use [app.ipynb](SupriyaUpadhyaya/SQLAssist-Text2Sql-Translator/notebooks/app.ipynb). 
+To run the app on google colab, use [app.ipynb](app.ipynb). 
