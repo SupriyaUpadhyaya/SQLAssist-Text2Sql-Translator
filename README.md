@@ -1,4 +1,4 @@
-# SQLAssist: A RAG unified framework for Natural Language to SQL translation
+# 🤖SQLAssist: A RAG unified framework for Natural Language to SQL translation
 Natural Language SQL Translator with following features and capabilities:
 
 - Includes query-relevant context in instruction prompt
@@ -18,11 +18,11 @@ You can use our checkpoint to evaluation directly or finetune using our notebook
 5. Folder [utils](utils) contains templates and helper code.
 6. Folder `static` contains files used in readme.
 
-### Fine-tuning
+### Fine-tuning🔧
 
 Google Colab notebooks are available at [notebooks](notebooks)
 
-### Direct Evaluation
+### Direct Evaluation📊
 
 This evaluation script is tailored to assess the performance of our finetuned model across multiple complexity levels using metrics such as BLEU score and ROUGE score. We use text-to-sql datasets for easy, medium and hard complexities from [determined-ai](https://huggingface.co/determined-ai). The results are visulaized using box plots.
 
@@ -32,7 +32,7 @@ python evaluation.py
 
 Evaluation results are saved in `results` 
 
-### SQLAssist application
+### SQLAssist application🌐
 
 Start the SQLAssist application on Google Colab using [app.ipynb](SupriyaUpadhyaya/SQLAssist-Text2Sql-Translator/notebooks/app.ipynb)
 
