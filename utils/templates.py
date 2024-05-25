@@ -46,7 +46,7 @@ SQL Result: {exec_result['data']}
 Answer:'''
 
 
-answer_prompt = '''Given the following user question, corresponding SQL query, and SQL result, answer the user question in a sentence.
+nonlist_answer_prompt = '''Given the following user question, corresponding SQL query, and SQL result, answer the user question in a sentence.
  Question: {exec_result['question']}
  SQL Query: {exec_result['sql']}
  SQL Result: {exec_result['data']}

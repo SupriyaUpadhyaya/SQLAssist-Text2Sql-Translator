@@ -1,6 +1,6 @@
 import sqlite3
 import streamlit as st
-from utils.templates import list_answer_prompt
+from utils.templates import list_answer_prompt, nonlist_answer_prompt
 
 class Rephraser():
   
@@ -13,13 +13,13 @@ class Rephraser():
         return True if "List" in question else False
 
   def rephrase(self,
-               exec_result) -> dict:
+               exec_result) -> str:
         
     if 'data' in exec_result and len(exec_result['data']) > 0 and exec_result['data'][0] != (None,):
-        if isListRequested:
+        if self.isListRequested:
             answer_prompt = list_answer_prompt.format(exec_result)
         else:
-            answer_prompt = answer_prompt.format(exec_result)
+            answer_prompt = nonlist_answer_prompt.format(exec_result)
         inputs = self.tokenizer(answer_prompt, return_tensors = "pt").to("cuda")
         outputs = self.model.generate(**inputs, max_new_tokens = 64)
         input_length = inputs["input_ids"].shape[1]

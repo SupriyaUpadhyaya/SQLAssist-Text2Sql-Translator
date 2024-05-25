@@ -22,9 +22,9 @@ def load_model():
     dtype = None # None for auto detection. Float16 for Tesla T4, V100, Bfloat16 for Ampere+
     load_in_4bit = True # Use 4bit quantization to reduce memory usage. Can be False.
     
-    tokenizer = AutoTokenizer.from_pretrained("TinyLlama/TinyLlama-1.1B-Chat-v1.0")
+    tokenizer = AutoTokenizer.from_pretrained("basavaraj/text2sql-Llama3-8b")
     model = LlamaForCausalLM.from_pretrained(
-    "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    "basavaraj/text2sql-Llama3-8b",
     load_in_4bit=True,
     torch_dtype=dtype)
     
@@ -36,7 +36,7 @@ def load_model():
     st.session_state["refiner"] = Refiner(tokenizer=tokenizer, model=model)
     st.session_state["rephraser"] = Rephraser(tokenizer=tokenizer, model=model)
 
-def execute_sql(self, cursor, sql: str, question: str) -> dict:
+def execute_sql(cursor, sql, question) -> dict:
     try:
         cursor.execute(sql)
         result = cursor.fetchall()
@@ -99,7 +99,7 @@ def update_history(exec_result):
         if len(st.session_state.history.messages) == 2:
             st.session_state.history.messages.pop()
             st.session_state.history.messages.pop()
-        st.session_state.history.add_user_message(question)
+        st.session_state.history.add_user_message(exec_result['question'])
         st.session_state.history.add_ai_message(exec_result['sql'])
 
 def write_log(question, selected_tables, exec_result, answer, messages, is_refined, refined_generations):
@@ -135,7 +135,7 @@ def init_db(db_path):
     # Get database connection
     conn = sqlite3.connect(db_path)
     conn.text_factory = lambda b: b.decode(errors="ignore")
-    st.session_state["cursor"] = conn.cursor()
+    st.session_state["engine"] = conn.cursor()
 
 def transcribe(question):
     
@@ -149,9 +149,9 @@ def transcribe(question):
 
     generated_sql = generate_sql(prompt, st.session_state.tokenizer, st.session_state.model)
     
-    exec_result = execute_sql(generated_sql, st.session_state.engine)
+    exec_result = execute_sql(st.session_state.engine, generated_sql, question)
     
-    refined_exec_result = st.session_state.refiner.refine(enerated_sql, exec_result, context, exec_result)
+    refined_exec_result = st.session_state.refiner.refine(generated_sql, exec_result, context, exec_result)
 
     rephrased_answer = st.session_state.rephraser.rephrase(refined_exec_result)
 

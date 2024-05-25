@@ -28,7 +28,7 @@ class ContextRetriever():
     def __init__(self):
         
         self.vector_index_dict = {}
-        self.engine = create_engine("sqlite://///home/raj/HCNLP-Text2Sql-Project/hcnlp/SQLAssist-Text2Sql-Translator/db/worlddb.db")
+        self.engine = create_engine("sqlite:////content/drive/MyDrive/SQLAssist-Text2Sql-Translator/db/worlddb.db")
         self.sql_database = SQLDatabase(self.engine)
         self.engine = self.sql_database.engine
         self.embed_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")

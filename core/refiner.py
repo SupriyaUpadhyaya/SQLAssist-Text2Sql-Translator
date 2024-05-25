@@ -1,6 +1,7 @@
 import sqlite3
 import streamlit as st
 from utils.templates import refiner_template
+from utils import utils
 
 class Refiner():
   
@@ -32,7 +33,7 @@ class Refiner():
 
   def refine(self,
                query: str,
-               evidence:str,
+               exec_result,
                schema_info: str,
                error_info: dict,
                retry = 5,
@@ -48,7 +49,7 @@ class Refiner():
                 sql_arg = error_info.get('sql')
                 sqlite_error = error_info.get('sqlite_error')
                 exception_class = error_info.get('exception_class')
-                prompt = refiner_template.format(query=query, evidence=evidence, desc_str=schema_info, \
+                prompt = refiner_template.format(query=query, evidence=exec_result, desc_str=schema_info, \
                                             fk_str=fk_info, sql=sql_arg, sqlite_error=sqlite_error, \
                                                 exception_class=exception_class)
 
@@ -59,10 +60,9 @@ class Refiner():
                 response = self.tokenizer.batch_decode(
                 outputs[:, input_length:], skip_special_tokens=True)
                 query = response[0]                
-                refined_generations.append(query_generated)
-                exec_result = utils.execute_sql(sql=query_generated, question=question)
+                refined_generations.append(query)
+                exec_result = utils.execute_sql(cursor=st.session_state.engine, sql=query, question=error_info.get('question'))
                 count += 1
             else:
                 count = retry + 1
-        
         return exec_result
