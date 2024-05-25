@@ -39,7 +39,7 @@ class ContextRetriever():
             SQLTableSchema(table_name="countrylanguage", context_str="Connects countries with their spoken languages. A combination of CountryCode (referencing the country table) and Language (language name) forms the primary key, ensuring a unique relationship between a country and its languages. It has an IsOfficial flag indicating if the language is officially recognized in the country. It also stores the percentage (Percentage) of the population speaking that language.")
         ]
 
-        self.table_index_dir = "table_index_dir"
+        self.table_index_dir = "db/table_index"
         if not Path(self.table_index_dir).exists():
             os.makedirs(self.table_index_dir)
 

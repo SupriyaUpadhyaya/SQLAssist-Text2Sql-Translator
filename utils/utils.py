@@ -33,6 +33,7 @@ def load_model():
     st.session_state["contextRetriever"] = ContextRetriever()
     st.session_state["refiner"] = Refiner(tokenizer=tokenizer, model=model)
     st.session_state["rephraser"] = Rephraser(tokenizer=tokenizer, model=model)
+    return model, tokenizer
 
 def execute_sql(db_path, sql, question) -> dict:
     conn = sqlite3.connect(db_path)
