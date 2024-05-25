@@ -61,7 +61,7 @@ class Refiner():
                 outputs[:, input_length:], skip_special_tokens=True)
                 query = response[0]                
                 refined_generations.append(query)
-                exec_result = utils.execute_sql(cursor=st.session_state.engine, sql=query, question=error_info.get('question'))
+                exec_result = utils.execute_sql(db_path=st.session_state.db_path, sql=query, question=error_info.get('question'))
                 count += 1
             else:
                 count = retry + 1
