@@ -22,7 +22,7 @@ For evaluation use [evaluation.ipynb](SupriyaUpadhyaya/SQLAssist-Text2Sql-Transl
 
 ##
 ### SQLAssist Finetuned Model
-Our finetuned model can be downloaded from huggingface [basavaraj/text2sql-Llama3-8b](https://huggingface.co/basavaraj/text2sql-Llama3-8b)
+Our Llama-3-8b finetuned model can be downloaded from huggingface [basavaraj/text2sql-Llama3-8b](https://huggingface.co/basavaraj/text2sql-Llama3-8b)
 
 ##
 ### App
