@@ -119,3 +119,6 @@ def main():
     calculate_mean_scores(evaluated_df)
     calculate_scores_by_complexity(evaluated_df, DATASET_IDS)
     plot_scores(evaluated_df)
+
+if __name__ == "__main__":
+    main()
