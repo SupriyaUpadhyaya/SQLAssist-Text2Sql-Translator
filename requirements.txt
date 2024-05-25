@@ -15,3 +15,7 @@ rouge-score
 datasets
 huggingface_hub[hf_transfer]
 sentence-transformers
+seaborn
+matplotlib
+nltk
+absl-py
