@@ -1,4 +1,4 @@
-# SQLAssist Framework: Core Modules
+# SQLAssist Framework: Core Modules🔑
 
 ### [Context Retriever](context_retriever.py)
 The Context Retriever module is designed to optimize querying and interaction with large databases by segmenting them into smaller subdatabases and filtering out unnecessary information. This module achieves efficient data handling through two main functionalities: 
