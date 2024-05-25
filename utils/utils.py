@@ -4,7 +4,6 @@ import sqlite3
 import streamlit as st
 from unsloth import FastLanguageModel
 from core.context_retriever import ContextRetriever
-from dotenv import load_dotenv
 from utils.templates import refiner_template
 from core.refiner import Refiner
 from core.rephraser import Rephraser
@@ -13,7 +12,6 @@ from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_core.prompts import MessagesPlaceholder, ChatPromptTemplate
 from transformers import LlamaTokenizer, LlamaForCausalLM, AutoTokenizer
 from langchain_community.tools.sql_database.tool import QuerySQLDataBaseTool
-load_dotenv()
 from utils.templates import user_message_template, text_to_sql_inference_tmpl_str, system_message
 
 # Set a default model
@@ -36,7 +34,10 @@ def load_model():
     st.session_state["refiner"] = Refiner(tokenizer=tokenizer, model=model)
     st.session_state["rephraser"] = Rephraser(tokenizer=tokenizer, model=model)
 
-def execute_sql(cursor, sql, question) -> dict:
+def execute_sql(db_path, sql, question) -> dict:
+    conn = sqlite3.connect(db_path)
+    conn.text_factory = lambda b: b.decode(errors="ignore")
+    cursor = conn.cursor()
     try:
         cursor.execute(sql)
         result = cursor.fetchall()
@@ -131,27 +132,21 @@ def get_history():
           
     return st.session_state.history.messages
 
-def init_db(db_path):
-    # Get database connection
-    conn = sqlite3.connect(db_path)
-    conn.text_factory = lambda b: b.decode(errors="ignore")
-    st.session_state["engine"] = conn.cursor()
-
-def transcribe(question):
+def transcribe(question, contextRetriever):
     
     prev_hist = get_history()
     
-    selected_table_names, selected_table_schema_objs = get_selected_tables(st.session_state.contextRetriever, question)
+    selected_table_names, selected_table_schema_objs = get_selected_tables(contextRetriever, question)
     
-    context = st.session_state.contextRetriever.get_table_context_and_rows_str(question, selected_table_schema_objs)
+    context = contextRetriever.get_table_context_and_rows_str(question, selected_table_schema_objs)
     
     prompt = get_inference_prompt(st.session_state.follow_up, question, context, prev_hist)
 
     generated_sql = generate_sql(prompt, st.session_state.tokenizer, st.session_state.model)
     
-    exec_result = execute_sql(st.session_state.engine, generated_sql, question)
+    exec_result = execute_sql(st.session_state.db_path, generated_sql, question)
     
-    refined_exec_result = st.session_state.refiner.refine(generated_sql, exec_result, context, exec_result)
+    is_refined, refined_generations, refined_exec_result = st.session_state.refiner.refine(generated_sql, exec_result, context, exec_result)
 
     rephrased_answer = st.session_state.rephraser.rephrase(refined_exec_result)
 

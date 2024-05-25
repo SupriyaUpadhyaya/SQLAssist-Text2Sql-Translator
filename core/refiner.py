@@ -37,7 +37,7 @@ class Refiner():
                schema_info: str,
                error_info: dict,
                retry = 5,
-               fk_info = "") -> dict:
+               fk_info = ""):
         
         count = 0
         is_refined = False
@@ -65,4 +65,4 @@ class Refiner():
                 count += 1
             else:
                 count = retry + 1
-        return exec_result
+        return is_refined, refined_generations, exec_result

@@ -16,10 +16,10 @@ class Rephraser():
                exec_result) -> str:
         
     if 'data' in exec_result and len(exec_result['data']) > 0 and exec_result['data'][0] != (None,):
-        if self.isListRequested:
-            answer_prompt = list_answer_prompt.format(exec_result)
+        if self.isListRequested(exec_result['question']):
+            answer_prompt = list_answer_prompt.format(question=exec_result['question'], sql=exec_result['sql'], data=exec_result['data'])
         else:
-            answer_prompt = nonlist_answer_prompt.format(exec_result)
+            answer_prompt = nonlist_answer_prompt.format(question=exec_result['question'], sql=exec_result['sql'], data=exec_result['data'])
         inputs = self.tokenizer(answer_prompt, return_tensors = "pt").to("cuda")
         outputs = self.model.generate(**inputs, max_new_tokens = 64)
         input_length = inputs["input_ids"].shape[1]

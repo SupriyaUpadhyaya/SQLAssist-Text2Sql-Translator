@@ -40,16 +40,16 @@ Answer: Here's the list of 5 cities in country with Italian language
 
 Here is a new example, please start answering:
 
-Question: {exec_result['question']}
-SQL Query: {exec_result['sql']}
-SQL Result: {exec_result['data']}
+Question: {question}
+SQL Query: {sql}
+SQL Result: {data}
 Answer:'''
 
 
 nonlist_answer_prompt = '''Given the following user question, corresponding SQL query, and SQL result, answer the user question in a sentence.
- Question: {exec_result['question']}
- SQL Query: {exec_result['sql']}
- SQL Result: {exec_result['data']}
+ Question: {question}
+ SQL Query: {sql}
+ SQL Result: {data}
  Answer:'''
 
 
